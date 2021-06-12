@@ -3,14 +3,14 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const register = require("./v1/register.js")
 const mongoose = require('mongoose');
-
+const uri = "mongodb+srv://trapLord2:trapLord_123@cluster0.mstc8.mongodb.net/shawtyManager?retryWrites=true&w=majority"
 const app = express();
 app.use(bodyParser.json());
 
 
 //mongoose connection
 
-mongoose.connect('mongodb://localhost:27017/login-app-db', {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology:true
 })
