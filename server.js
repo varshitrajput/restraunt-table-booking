@@ -23,6 +23,6 @@ app.post('/api/register', async (req, res) => {
 
 
 
-app.listen(6969, () => {
+app.listen(process.env.PORT || 3030, () => {
     console.log("Started Listening at port 6969")
 })
