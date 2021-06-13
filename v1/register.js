@@ -28,7 +28,7 @@ const registerUser = async function (req) {
             password
         })
         console.log(response)
-        return {err:false,data:{response},message:"Registered Successfully, Please Log in"}
+        return {status:true,data:{response},message:"Registered Successfully, Please Log in"}
     } catch (error) {
         if (error.code === 11000) {
             return { status: false, data: {},message:"Username already exists"}
