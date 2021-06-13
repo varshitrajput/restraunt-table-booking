@@ -29,7 +29,9 @@ const addShawty = async function (req) {
 
 
 const getShawty = async function (req) {
-    let { username } = req.body
+    let  username  = req.query.username
+    console.log(username)
+
     if (!username) return { status: false, data: {}, message: "Invalid Username" }
     const user = await Shawty.find({ username }).lean()
     if(!user){ return{status: false, message:"User not found"}}
