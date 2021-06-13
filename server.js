@@ -27,7 +27,7 @@ app.post('/api/register', async (req, res) => {
     res.send(data);
 })
 
-app.get('/api/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     console.log(req.body)
     let data = await register.loginUser(req);
     res.send(data);
