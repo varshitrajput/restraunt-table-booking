@@ -39,7 +39,7 @@ app.post('/api/addShawty', async (req, res) => {
     res.send(data);
 })
 
-app.get('/api/getShawty', async (req, res) => {
+app.post('/api/getShawty', async (req, res) => {
     console.log(req.body)
     let data = await shawty.getShawty(req);
     res.send(data);
