@@ -3,6 +3,28 @@ const Shawty = require('../model/shawty')
 
 
 
+const addShawtyAttribute = async function (req) {
+    let { detail,shawtyName,username } = req.body;
+    if (!detail) return { status: false, data:null, message: "Invalid Request, Please enter the detail you want to enter" }
+    try {
+        const response = await Shawty.findOneAndUpdate(
+            { "shawtyName": shawtyName, "username": username },
+            [{  $set : { "detail" : "$detail" + detail }  }],
+            { returnNewDocument: true,upsert:true }
+        )
+        console.log(response)
+        return { status: true, data: { response }, message: "Shawty details updated" }
+    } catch (error) {
+        console.log(error)
+        return { status: false, data: error,message:"something went wrong"}
+    }   
+
+
+
+
+}
+
+
 const addShawty = async function (req) {
     
     let { username, shawtyName, shawtyAge } = req.body
@@ -38,4 +60,4 @@ const getShawty = async function (req) {
 }
 
 
-module.exports = { addShawty,getShawty };
+module.exports = { addShawty,getShawty,addShawtyAttribute };

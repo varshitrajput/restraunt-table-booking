@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 //mongoose connection
 app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "");
     res.header("Access-Control-Allow-Headers", "*");
     next();
   });
@@ -45,6 +45,11 @@ app.post('/api/getShawty', async (req, res) => {
     res.send(data);
 })
 
+app.post('/api/updateShawty', async (req, res) => {
+    console.log(req.body)
+    let data = await shawty.addShawtyAttribute(req);
+    res.send(data);
+})
 
 
 app.listen(process.env.PORT || 3030, () => {
