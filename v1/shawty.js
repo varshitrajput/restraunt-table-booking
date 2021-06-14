@@ -10,7 +10,7 @@ const addShawtyAttribute = async function (req) {
         const response = await Shawty.findOneAndUpdate(
             { "shawtyName": shawtyName, "username": username },
             [{  $set : { "detail" : "$detail" + detail }  }],
-            { returnNewDocument: true,upsert:true }
+            {upsert:true ,new:true}
         )
         console.log(response)
         return { status: true, data: { response }, message: "Shawty details updated" }

@@ -9,9 +9,10 @@ const app = express();
 app.use(bodyParser.json());
 
 
+
 //mongoose connection
 app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
     next();
   });
@@ -20,6 +21,8 @@ mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology:true
 })
+
+mongoose.set('debug', true);
 
 app.post('/api/register', async (req, res) => {
     console.log(req.body)
