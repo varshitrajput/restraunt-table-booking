@@ -23,6 +23,7 @@ mongoose.connect(uri, {
 })
 
 mongoose.set('debug', true);
+mongoose.set('useCreateIndex', true);
 
 app.post('/api/register', async (req, res) => {
     console.log(req.body)

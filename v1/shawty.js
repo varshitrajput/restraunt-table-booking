@@ -4,23 +4,112 @@ const Shawty = require('../model/shawty')
 
 
 const addShawtyAttribute = async function (req) {
-    let { detail,shawtyName,username } = req.body;
-    if (!detail) return { status: false, data:null, message: "Invalid Request, Please enter the detail you want to enter" }
-    try {
-        const response = await Shawty.findOneAndUpdate(
-            { "shawtyName": shawtyName, "username": username },
-            [{  $set : { "detail" : "$detail" + detail }  }],
-            {upsert:true ,new:true}
-        )
-        console.log(response)
-        return { status: true, data: { response }, message: "Shawty details updated" }
-    } catch (error) {
-        console.log(error)
-        return { status: false, data: error,message:"something went wrong"}
-    }   
+    let { value,shawtyName,username,type } = req.body;
+    if (!value) return { status: false, data: null, message: "Invalid Request, Please enter the detail you want to enter" }
+    
+    if (type == "DOB") {
+        try {
+            const response = await Shawty.findOneAndUpdate(
+                { "shawtyName": shawtyName, "username": username },
+                [{  $set : {DOB : value }  }],
+                {upsert:true ,new:true}
+            )
+            console.log(response)
+            return { status: true, data: { response }, message: "Shawty details updated" }
+        } catch (error) {
+            console.log(error)
+            return { status: false, data: error,message:"something went wrong"}
+        }   
+    }
 
+    else if (type == "LIKES") {
 
+        console.log("adding a like")
+        try {
+            const response = await Shawty.findOneAndUpdate(
+                {
+                    "shawtyName": shawtyName,
+                    "username": username
+                },
+                {
+                    $push: {
+                        "likes": {
+                            Stuff: value,
+                            Date: Date.now()
+                        }
+                    }
+                },
+                {
+                    upsert: true,
+                    new: true
+                }
+            )
+            console.log(response)
+            return { status: true, data: { response }, message: "Shawty details updated" }
+        } catch (error) {
+            console.log(error)
+            return { status: false, data: error,message:"something went wrong"}
+        }   
+    }
 
+    else if (type == "DISLIKES") {
+
+        console.log("adding a dislike")
+        try {
+            const response = await Shawty.findOneAndUpdate(
+                {
+                    "shawtyName": shawtyName,
+                    "username": username
+                },
+                {
+                    $push: {
+                        "dislikes": {
+                            Stuff: value,
+                            Date: Date.now()
+                        }
+                    }
+                },
+                {
+                    upsert: true,
+                    new: true
+                }
+            )
+            console.log(response)
+            return { status: true, data: { response }, message: "Shawty details updated" }
+        } catch (error) {
+            console.log(error)
+            return { status: false, data: error,message:"something went wrong"}
+        }   
+    }
+    else if (type == "LIES") {
+
+        console.log("adding a lie")
+        try {
+            const response = await Shawty.findOneAndUpdate(
+                {
+                    "shawtyName": shawtyName,
+                    "username": username
+                },
+                {
+                    $push: {
+                        "lies": {
+                            Stuff: value,
+                            Date: Date.now()
+                        }
+                    }
+                },
+                {
+                    upsert: true,
+                    new: true
+                }
+            )
+            console.log(response)
+            return { status: true, data: { response }, message: "Shawty details updated" }
+        } catch (error) {
+            console.log(error)
+            return { status: false, data: error,message:"something went wrong"}
+        }   
+    }
 
 }
 
@@ -35,8 +124,11 @@ const addShawty = async function (req) {
             shawtyId,
             username,
             shawtyName,
-            shawtyAge
-            
+            shawtyAge,
+            DOB:"",
+            likes:[],
+            dislikes:[],
+            lies:[]
         })
         console.log(response)
         return {err:false,data:{response},message:"Shawty Added Successfully"}
