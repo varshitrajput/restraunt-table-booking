@@ -1,7 +1,7 @@
 module.exports = {
     servers:[
         {
-            url:"http://localhost:3030",
+            url:"https://intense-wave-33897.herokuapp.com",
             description:"Local server, npm run dev"
         },
     ]
