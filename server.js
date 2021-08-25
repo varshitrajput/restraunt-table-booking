@@ -85,6 +85,6 @@ app.post('/api/updateBooking', async (req, res) => {
 })
 
 
-app.listen(process.env.PORT || 3030, () => {
+app.listen(process.env.PORT || 80, () => {
     console.log("Started Listening at port")
 })
